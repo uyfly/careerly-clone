@@ -22,31 +22,31 @@ const Header = () => {
           </a>
           <a
             href=""
-            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900"
+            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900 text-slate-500"
           >
             <p>커리어리 트렌드</p>
           </a>
           <a
             href=""
-            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900"
+            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900 text-slate-500"
           >
             <p>개발자 Q&A</p>
           </a>
           <a
             href=""
-            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900"
+            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900 text-slate-500"
           >
             <p>채용 공고 매칭</p>
           </a>
           <a
             href=""
-            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900"
+            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900 text-slate-500"
           >
             <p>사이드 프로젝트</p>
           </a>
           <a
             href=""
-            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900"
+            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900 text-slate-500"
           >
             <p>부트캠프 비교</p>
           </a>
