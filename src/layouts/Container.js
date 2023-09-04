@@ -36,10 +36,7 @@ const Container = () => {
               <div>
                 <div className="bg-white border border-solid border-slate-300">
                   <div className="flex justify-between items-center p-4">
-                    <a
-                      className="flex gap-4 items-center"
-                      aria-aria-label="프로필"
-                    >
+                    <a className="flex gap-4 items-center" aria-label="프로필">
                       <div className="relative flex-none w-10 h-10 border border-solid border-slate-200 bg-white rounded-full"></div>
                       <div className="flex-1">
                         <p className="text-sm font-bold text-slate-900">우영</p>
