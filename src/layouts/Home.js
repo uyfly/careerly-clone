@@ -4,8 +4,9 @@ import { ReactComponent as Repost } from "../assets/images/ico/ico_repost.svg";
 import { ReactComponent as Reply } from "../assets/images/ico/ico_reply.svg";
 import { ReactComponent as Bookmark } from "../assets/images/ico/ico_bookmark.svg";
 import { ReactComponent as Sharing } from "../assets/images/ico/ico_sharing.svg";
+import { Link } from "react-router-dom";
 
-const Container = () => {
+const Home = () => {
   return (
     <div className="bg-slate-50">
       <div className="w-[1024px] px-6 grid grid-cols-12 gap-12 bg-slate-50 mx-auto">
@@ -139,4 +140,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default Home;
