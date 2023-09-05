@@ -96,6 +96,11 @@
   color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
+.text-color-coral-600 {
+  --tw-text-opacity: 1;
+  color: rgb(237 102 83 / var(--tw-text-opacity));
+}
+
 .fill-slate-300 {
   fill: #cbd5e1;
 }
@@ -106,6 +111,20 @@
 
 .fill-slate-600 {
   fill: #475569;
+}
+
+.fill-slate-900 {
+  fill: #0f172a;
+}
+
+.border-color-coral-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(237 102 83 / var(--tw-border-opacity));
+}
+
+.bg-color-coral-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(237 102 83 / var(--tw-bg-opacity));
 }
 
 .w-5 {
