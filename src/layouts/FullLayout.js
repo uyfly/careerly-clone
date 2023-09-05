@@ -1,15 +1,15 @@
 import Header from "./Header";
-import Container from "./Container";
+import { Outlet } from "react-router";
 
 const FullLayout = () => {
   return (
-    <main>
-      <div>
-        <Header />
-        <div className="h-14"></div>
-        <Container />
-      </div>
-    </main>
+    <>
+      <Header />
+      <div className="h-14"></div>
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 };
 
