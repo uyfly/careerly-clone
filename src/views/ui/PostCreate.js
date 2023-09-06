@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as Back } from "../../assets/images/ico/ico_back.svg";
 import { ReactComponent as Image } from "../../assets/images/ico/ico_image.svg";
 import { ReactComponent as Add } from "../../assets/images/ico/ico_add.svg";
+import { ReactComponent as Cancel } from "../../assets/images/ico/ico_cancel.svg";
 
 const PostCreate = () => {
+  const [editingTitle, setEditingTitle] = useState(false);
+
+  const editTitleHandler = () => {
+    setEditingTitle((prev) => !prev);
+  };
+
   return (
     <div>
       <div className="h-screen bg-slate-50 flex flex-col">
@@ -40,18 +47,44 @@ const PostCreate = () => {
         </div>
         <div className="mx-auto w-full max-w-3xl flex-1 overflow-auto hide-scroll-bar bg-white md:border md:border-solid md:border-slate-300 md:border-y-0">
           <div className="mx-auto w-full max-w-[633px] px-4 flex flex-col py-5">
-            <div className="flex flex-col">
-              <div
-                className="py-3 flex gap-2 items-center group"
-                role="button"
-                aria-hidden="true"
-              >
-                <Add className="fill-slate-300 md:group-hover:fill-slate-400" />
-                <p className="font-bold text-slate-300 md:group-hover:text-slate-400 text-xl leading-normal">
-                  제목 추가
-                </p>
+            {!editingTitle && (
+              <div className="flex flex-col" onClick={editTitleHandler}>
+                <div
+                  className="py-3 flex gap-2 items-center group"
+                  role="button"
+                  aria-hidden="true"
+                >
+                  <Add className="fill-slate-300 md:group-hover:fill-slate-400" />
+                  <p className="font-bold text-slate-300 md:group-hover:text-slate-400 text-xl leading-normal">
+                    제목 추가
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
+            {editingTitle && (
+              <div className="flex flex-col">
+                <div className="flex justify-between items-center">
+                  <div
+                    role="button"
+                    className="py-3 flex gap-2 items-center group"
+                    aria-hidden="true"
+                    onClick={editTitleHandler}
+                  >
+                    <Cancel className="fill-slate-300 md:group-hover:fill-slate-400" />
+                    <p className="font-bold text-slate-300 md:group-hover:text-slate-400 text-sm leading-[30px]">
+                      취소
+                    </p>
+                  </div>
+                  <p className="text-slate-400 text-sm">0 / 40</p>
+                </div>
+                <textarea
+                  className="font-bold text-slate-900 text-xl leading-normal placeholder:text-slate-300 border-0 rounded-none px-0 py-3 w-full resize-none focus:ring-0 focus:outline-none caret-color-teal-800"
+                  name="commentTitle"
+                  placeholder="제목을 입력하세요."
+                  rows="1"
+                ></textarea>
+              </div>
+            )}
             <textarea
               className="text-slate-900 placeholder:text-slate-300 border-0 rounded-none px-0 py-6 resize-none focus:ring-0 focus:outline-none caret-color-teal-800 overflow-y-hidden"
               name="description"
