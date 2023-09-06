@@ -26,9 +26,11 @@ const Home = () => {
                 className="w-full bg-slate-50 border border-solid border-color-slate-200 rounded-lg p-3.5 text-left focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2"
                 href="/posts/create?from=newsfeed"
               >
-                <p className="text-sm text-color-slate-400">
-                  나누고 싶은 생각이 있으신가요?
-                </p>
+                <Link to="/posts/create">
+                  <p className="text-sm text-color-slate-400">
+                    나누고 싶은 생각이 있으신가요?
+                  </p>
+                </Link>
               </button>
             </div>
           </div>
