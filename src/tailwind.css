@@ -105,6 +105,10 @@
   fill: #cbd5e1;
 }
 
+.fill-slate-400 {
+  fill: #94a3b8;
+}
+
 .fill-slate-500 {
   fill: #64748b;
 }
@@ -125,6 +129,10 @@
 .bg-color-coral-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(237 102 83 / var(--tw-bg-opacity));
+}
+
+.caret-color-teal-800 {
+  caret-color: #115e59;
 }
 
 .w-5 {
