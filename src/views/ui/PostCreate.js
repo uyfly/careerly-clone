@@ -6,9 +6,14 @@ import { ReactComponent as Cancel } from "../../assets/images/ico/ico_cancel.svg
 
 const PostCreate = () => {
   const [editingTitle, setEditingTitle] = useState(false);
+  const [editingContents, setEditingContents] = useState(false);
 
   const editTitleHandler = () => {
     setEditingTitle((prev) => !prev);
+  };
+
+  const editContentsHandler = (e) => {
+    setEditingContents(e.target.value.length > 0);
   };
 
   return (
@@ -25,14 +30,18 @@ const PostCreate = () => {
             <div className="flex gap-2 px-2">
               <button
                 type="button"
-                className="focus:outline-0 rounded bg-white border border-solid border-color-coral-600 flex-none px-4 py-2 text-sm opacity-40"
+                className={`focus:outline-0 rounded bg-white border border-solid border-color-coral-600 flex-none px-4 py-2 text-sm ${
+                  editingContents ? "opacity-100" : "opacity-40"
+                }`}
                 disabled=""
               >
                 <span className="text-color-coral-600">보관</span>
               </button>
               <button
                 type="button"
-                className="focus:outline-0 rounded bg-color-coral-600 flex-none px-4 py-2 text-sm opacity-40"
+                className={`focus:outline-0 rounded bg-color-coral-600 flex-none px-4 py-2 text-sm ${
+                  editingContents ? "opacity-100" : "opacity-40"
+                }`}
                 disabled=""
               >
                 <span className="text-white">완료</span>
@@ -90,6 +99,7 @@ const PostCreate = () => {
               name="description"
               placeholder="나누고 싶은 생각을 적어주세요.
 링크나 사진을 추가할 수도 있어요."
+              onChange={editContentsHandler}
             ></textarea>
           </div>
         </div>
