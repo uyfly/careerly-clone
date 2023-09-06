@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import FullLayout from "./layouts/FullLayout";
 import PostCreate from "./views/ui/PostCreate";
 import Home from "./layouts/Home";
@@ -8,7 +12,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <FullLayout />,
-    children: [{ path: "/home", element: <Home /> }],
+    children: [
+      { path: "/", element: <Navigate to="/home" /> },
+      { path: "/home", element: <Home /> },
+    ],
   },
   { path: "/posts/create", element: <PostCreate /> },
 ]);
