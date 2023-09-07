@@ -8,8 +8,18 @@ const PostCreate = () => {
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingContents, setEditingContents] = useState(false);
 
-  const editTitleHandler = () => {
+  const [titleLength, setTitleLength] = useState(0);
+
+  const isEditing = () => {
     setEditingTitle((prev) => !prev);
+    setTitleLength(0);
+  };
+
+  const editTitleHandler = (e) => {
+    setTitleLength(e.target.value.length);
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
   };
 
   const editContentsHandler = (e) => {
@@ -57,7 +67,7 @@ const PostCreate = () => {
         <div className="mx-auto w-full max-w-3xl flex-1 overflow-auto hide-scroll-bar bg-white md:border md:border-solid md:border-slate-300 md:border-y-0">
           <div className="mx-auto w-full max-w-[633px] px-4 flex flex-col py-5">
             {!editingTitle && (
-              <div className="flex flex-col" onClick={editTitleHandler}>
+              <div className="flex flex-col" onClick={isEditing}>
                 <div
                   className="py-3 flex gap-2 items-center group"
                   role="button"
@@ -77,20 +87,22 @@ const PostCreate = () => {
                     role="button"
                     className="py-3 flex gap-2 items-center group"
                     aria-hidden="true"
-                    onClick={editTitleHandler}
+                    onClick={isEditing}
                   >
                     <Cancel className="fill-slate-300 md:group-hover:fill-slate-400" />
                     <p className="font-bold text-slate-300 md:group-hover:text-slate-400 text-sm leading-[30px]">
                       취소
                     </p>
                   </div>
-                  <p className="text-slate-400 text-sm">0 / 40</p>
+                  <p className="text-slate-400 text-sm">{titleLength} / 40</p>
                 </div>
                 <textarea
                   className="font-bold text-slate-900 text-xl leading-normal placeholder:text-slate-300 border-0 rounded-none px-0 py-3 w-full resize-none focus:ring-0 focus:outline-none caret-color-teal-800"
                   name="commentTitle"
                   placeholder="제목을 입력하세요."
                   rows="1"
+                  maxLength={40}
+                  onChange={editTitleHandler}
                 ></textarea>
               </div>
             )}
