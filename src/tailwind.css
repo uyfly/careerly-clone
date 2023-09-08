@@ -146,3 +146,12 @@
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
