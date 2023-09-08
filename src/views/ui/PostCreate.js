@@ -3,6 +3,7 @@ import { ReactComponent as Back } from "../../assets/images/ico/ico_back.svg";
 import { ReactComponent as Image } from "../../assets/images/ico/ico_image.svg";
 import { ReactComponent as Add } from "../../assets/images/ico/ico_add.svg";
 import { ReactComponent as Cancel } from "../../assets/images/ico/ico_cancel.svg";
+import { Link } from "react-router-dom";
 
 const PostCreate = () => {
   const [editingTitle, setEditingTitle] = useState(false);
@@ -35,7 +36,9 @@ const PostCreate = () => {
               type="button"
               className="w-10 h-10 p-0 flex items-center justify-center focus:outline-none"
             >
-              <Back />
+              <Link to="/home">
+                <Back />
+              </Link>
             </button>
             <div className="flex gap-2 px-2">
               <button
@@ -113,6 +116,8 @@ const PostCreate = () => {
 링크나 사진을 추가할 수도 있어요."
               onChange={editContentsHandler}
             ></textarea>
+            <div className="h-4"></div>
+            <div className="py-2"></div>
           </div>
         </div>
       </div>
