@@ -16,10 +16,10 @@ const PostCreate = () => {
   };
 
   const editTitleHandler = (e) => {
-    setTitleLength(e.target.value.length);
     if (e.target.value.length > e.target.maxLength) {
       e.target.value = e.target.value.slice(0, e.target.maxLength);
     }
+    setTitleLength(e.target.value.length);
   };
 
   const editContentsHandler = (e) => {
