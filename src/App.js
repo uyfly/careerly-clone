@@ -7,6 +7,8 @@ import FullLayout from "./layouts/FullLayout";
 import PostCreate from "./views/ui/PostCreate";
 import Home from "./layouts/Home";
 import "./App.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;
