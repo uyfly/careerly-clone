@@ -1,8 +1,10 @@
 import React, { useState, useRef, useCallback } from "react";
 import { ReactComponent as Back } from "../../assets/images/ico/ico_back.svg";
-import { ReactComponent as Image } from "../../assets/images/ico/ico_image.svg";
+import { ReactComponent as ImageRegular } from "../../assets/images/ico/ico_image_regular.svg";
+import { ReactComponent as ImageSolid } from "../../assets/images/ico/ico_image_solid.svg";
 import { ReactComponent as Add } from "../../assets/images/ico/ico_add.svg";
 import { ReactComponent as Cancel } from "../../assets/images/ico/ico_cancel.svg";
+import { ReactComponent as File } from "../../assets/images/ico/ico_file.svg";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { create } from "../../store/postSlice";
@@ -10,6 +12,7 @@ import { create } from "../../store/postSlice";
 const PostCreate = () => {
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingContent, setEditingContent] = useState(false);
+  const [attachingImage, setAttachingImage] = useState(false);
 
   const [titleLength, setTitleLength] = useState(0);
 
@@ -27,6 +30,10 @@ const PostCreate = () => {
   const isEditing = () => {
     setEditingTitle((prev) => !prev);
     setTitleLength(0);
+  };
+
+  const isAttaching = () => {
+    setAttachingImage((prev) => !prev);
   };
 
   const newPost = {
@@ -67,7 +74,7 @@ const PostCreate = () => {
                 className={`focus:outline-0 rounded bg-white border border-solid border-color-coral-600 flex-none px-4 py-2 text-sm ${
                   editingContent ? "opacity-100" : "opacity-40"
                 }`}
-                disabled=""
+                disabled
               >
                 <span className="text-color-coral-600">보관</span>
               </button>
@@ -76,7 +83,7 @@ const PostCreate = () => {
                 className={`focus:outline-0 rounded bg-color-coral-600 flex-none px-4 py-2 text-sm ${
                   editingContent ? "opacity-100" : "opacity-40"
                 }`}
-                disabled=""
+                disabled={!editingContent ? "disabled" : null}
                 onClick={() => dispatch(create(newPost))}
               >
                 <span className="text-white">완료</span>
@@ -85,8 +92,17 @@ const PostCreate = () => {
           </div>
         </nav>
         <div className="bg-white flex items-center gap-4 w-full max-w-screen-md mx-auto px-3 py-2 border border-solid border-slate-300 border-t-0 border-x-0 md:border-x z-[1]">
-          <button type="button" className="p-1 focus:outline-none">
-            <Image />
+          <button
+            type="button"
+            className="p-1 focus:outline-none"
+            onClick={isAttaching}
+          >
+            {attachingImage ? <ImageSolid /> : <ImageRegular />}
+            {attachingImage && (
+              <div className="mx-1 tag-sm bg-color-teal-100 text-color-teal-600 cursor-default">
+                <span>0 / 9</span>
+              </div>
+            )}
           </button>
         </div>
         <div className="mx-auto w-full max-w-3xl flex-1 overflow-auto hide-scroll-bar bg-white md:border md:border-solid md:border-slate-300 md:border-y-0">
@@ -143,7 +159,26 @@ const PostCreate = () => {
               onChange={contentChangeHandler}
             ></textarea>
             <div className="h-4"></div>
-            <div className="py-2"></div>
+
+            <div className="py-2">
+              {attachingImage && (
+                <div className="flex flex-col gap-6 w-full">
+                  <div className="rounded border border-dashed border-slate-300 h-[120px] flex flex-col gap-2 items-center justify-center">
+                    <input type="file" multiple style={{ display: "none" }} />
+                    <button
+                      type="button"
+                      className="btn btn-md btn-slate-200 text-slate-500 flex gap-1 items-center"
+                    >
+                      <File />
+                      <span className="text-slate-500">파일 선택</span>
+                    </button>
+                    <p className="text-sm text-slate-400">
+                      또는 여기에 사진을 드래그해보세요.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
