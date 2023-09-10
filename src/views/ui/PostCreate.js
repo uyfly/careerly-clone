@@ -1,30 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { ReactComponent as Back } from "../../assets/images/ico/ico_back.svg";
 import { ReactComponent as Image } from "../../assets/images/ico/ico_image.svg";
 import { ReactComponent as Add } from "../../assets/images/ico/ico_add.svg";
 import { ReactComponent as Cancel } from "../../assets/images/ico/ico_cancel.svg";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { create } from "../../store/postSlice";
 
 const PostCreate = () => {
   const [editingTitle, setEditingTitle] = useState(false);
-  const [editingContents, setEditingContents] = useState(false);
+  const [editingContent, setEditingContent] = useState(false);
 
   const [titleLength, setTitleLength] = useState(0);
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const dispatch = useDispatch();
+
+  const textRef = useRef();
+
+  const handleResizeHeight = useCallback(() => {
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  }, []);
 
   const isEditing = () => {
     setEditingTitle((prev) => !prev);
     setTitleLength(0);
   };
 
-  const editTitleHandler = (e) => {
+  const newPost = {
+    id: Date.now().toString(),
+    title: title,
+    content: content,
+  };
+
+  const titleChangeHandler = (e) => {
+    setTitle(e.target.value);
     if (e.target.value.length > e.target.maxLength) {
       e.target.value = e.target.value.slice(0, e.target.maxLength);
     }
     setTitleLength(e.target.value.length);
   };
 
-  const editContentsHandler = (e) => {
-    setEditingContents(e.target.value.length > 0);
+  const contentChangeHandler = (e) => {
+    setContent(e.target.value);
+    setEditingContent(e.target.value.length > 0);
   };
 
   return (
@@ -44,7 +65,7 @@ const PostCreate = () => {
               <button
                 type="button"
                 className={`focus:outline-0 rounded bg-white border border-solid border-color-coral-600 flex-none px-4 py-2 text-sm ${
-                  editingContents ? "opacity-100" : "opacity-40"
+                  editingContent ? "opacity-100" : "opacity-40"
                 }`}
                 disabled=""
               >
@@ -53,9 +74,10 @@ const PostCreate = () => {
               <button
                 type="button"
                 className={`focus:outline-0 rounded bg-color-coral-600 flex-none px-4 py-2 text-sm ${
-                  editingContents ? "opacity-100" : "opacity-40"
+                  editingContent ? "opacity-100" : "opacity-40"
                 }`}
                 disabled=""
+                onClick={() => dispatch(create(newPost))}
               >
                 <span className="text-white">완료</span>
               </button>
@@ -105,7 +127,8 @@ const PostCreate = () => {
                   placeholder="제목을 입력하세요."
                   rows="1"
                   maxLength={40}
-                  onChange={editTitleHandler}
+                  value={title}
+                  onChange={titleChangeHandler}
                 ></textarea>
               </div>
             )}
@@ -114,7 +137,10 @@ const PostCreate = () => {
               name="description"
               placeholder="나누고 싶은 생각을 적어주세요.
 링크나 사진을 추가할 수도 있어요."
-              onChange={editContentsHandler}
+              ref={textRef}
+              value={content}
+              onInput={handleResizeHeight}
+              onChange={contentChangeHandler}
             ></textarea>
             <div className="h-4"></div>
             <div className="py-2"></div>
