@@ -74,7 +74,7 @@ const PostCreate = () => {
                 className={`focus:outline-0 rounded bg-white border border-solid border-color-coral-600 flex-none px-4 py-2 text-sm ${
                   editingContent ? "opacity-100" : "opacity-40"
                 }`}
-                disabled
+                disabled={!editingContent ? "disabled" : null}
               >
                 <span className="text-color-coral-600">보관</span>
               </button>
