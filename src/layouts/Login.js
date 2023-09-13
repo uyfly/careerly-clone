@@ -2,6 +2,7 @@ import React from "react";
 import "../tailwind.css";
 import kakao from "../assets/images/img/img_symbol_kakao.png";
 import apple from "../assets/images/img/img_symbol_apple.png";
+import { ReactComponent as Arrow } from "../assets/images/ico/ico_arrow.svg";
 import { ReactComponent as Logo } from "../assets/images/logos/logo.svg";
 
 const Login = () => {
@@ -77,15 +78,43 @@ const Login = () => {
                 </button>
                 <button
                   type="submit"
-                  class="w-full bg-color-black rounded py-3 flex items-center justify-center gap-1 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2"
+                  className="w-full bg-color-black rounded py-3 flex items-center justify-center gap-1 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2"
                 >
-                  <img class="h-5 w-5" src={apple} alt="apple_icon" />
-                  <span class="font-bold text-base text-color-white">
+                  <img className="h-5 w-5" src={apple} alt="apple_icon" />
+                  <span className="font-bold text-base text-color-white">
                     Apple로 계속하기
                   </span>
                 </button>
               </div>
             </form>
+            <div className="flex flex-row md:justify-center items-center gap-2">
+              <p className="text-sm text-color-slate-900">
+                아직 회원이 아니신가요? 3초 만에
+              </p>
+              <a className="flex items-center gap-1 p-1 group rounded hover:bg-color-slate-50 focus:bg-color-slate-50 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2">
+                <span className="text-sm font-bold text-color-slate-700 group-hover:text-color-slate-800">
+                  가입하기
+                </span>
+                <Arrow />
+              </a>
+            </div>
+            <div className="flex flex-row items-center gap-3 md:justify-center">
+              <a
+                href="/customer-service"
+                target="_blank"
+                rel="noreferrer nofollow"
+              >
+                <p className="text-xs text-slate-600 underline underline-offset-2">
+                  고객센터
+                </p>
+              </a>
+              <div className="h-3 w-px bg-color-slate-300"></div>
+              <a href="/forgot-password">
+                <p className="text-xs text-slate-600 underline underline-offset-2">
+                  비밀번호를 잊으셨나요?
+                </p>
+              </a>
+            </div>
           </div>
         </div>
         <div className="flex bg-color-slate-50 border-0 border-solid border-t border-color-slate-300 w-full">
