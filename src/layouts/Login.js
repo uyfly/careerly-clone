@@ -10,7 +10,7 @@ const Login = () => {
 
   return (
     <>
-      <nav className="h-14 border-0 border-b border-solid border-color-slate-300 bg-color-slate-50 !border-b-0 fixed w-full z-[5]">
+      <nav className="h-14 border-0 border-b border-solid border-color-slate-300 bg-color-slate-50 fixed w-full z-[5]">
         <div className="bg-white flex justify-between w-full h-full max-w-screen-md mx-auto px-2 md:px-4 border border-solid border-slate-300 border-t-0 border-x-0 md:border-x">
           <div className="flex items-center">
             <a href="" className="w-[94px] h-6 m-2 false">
@@ -91,7 +91,10 @@ const Login = () => {
               <p className="text-sm text-color-slate-900">
                 아직 회원이 아니신가요? 3초 만에
               </p>
-              <a className="flex items-center gap-1 p-1 group rounded hover:bg-color-slate-50 focus:bg-color-slate-50 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2">
+              <a
+                href=""
+                className="flex items-center gap-1 p-1 group rounded hover:bg-color-slate-50 focus:bg-color-slate-50 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2"
+              >
                 <span className="text-sm font-bold text-color-slate-700 group-hover:text-color-slate-800">
                   가입하기
                 </span>
