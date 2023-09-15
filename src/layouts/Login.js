@@ -10,7 +10,7 @@ const Login = () => {
 
   return (
     <>
-      <nav className="h-14 border-0 border-b border-solid border-color-slate-300 bg-color-slate-50 fixed w-full z-[5]">
+      <nav className="h-14 border-0 border-b border-solid border-color-slate-300 bor bg-color-slate-50 !border-b-0 fixed w-full z-[5]">
         <div className="bg-white flex justify-between w-full h-full max-w-screen-md mx-auto px-2 md:px-4 border border-solid border-slate-300 border-t-0 border-x-0 md:border-x">
           <div className="flex items-center">
             <a href="" className="w-[94px] h-6 m-2 false">
