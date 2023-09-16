@@ -10,6 +10,7 @@ import Login from "./layouts/Login";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import KakaoCallback from "./auth/KakaoCallback";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   },
   { path: "/posts/create", element: <PostCreate /> },
   { path: "/login", element: <Login /> },
+  { path: "/auth/kakao", element: <KakaoCallback /> },
 ]);
 
 function App() {

@@ -6,6 +6,15 @@ import { ReactComponent as Arrow } from "../assets/images/ico/ico_arrow.svg";
 import { ReactComponent as Logo } from "../assets/images/logos/logo.svg";
 
 const Login = () => {
+  const REST_API_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_ID}`;
+  const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const kakaoLoginHandler = () => {
+    console.log(link);
+    window.location.href = link;
+  };
+
   const emailChangeHandler = () => {};
 
   return (
@@ -68,8 +77,9 @@ const Login = () => {
                   <div className="bg-color-slate-300 w-1/2 h-px"></div>
                 </div>
                 <button
-                  type="submit"
+                  type="button"
                   className="mb-3 w-full bg-[#FEE500] rounded py-3 flex items-center justify-center gap-1 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2"
+                  onClick={kakaoLoginHandler}
                 >
                   <img className="h-5 w-5" src={kakao} alt="kakao_icon" />
                   <span className="font-bold text-base text-color-slate-900">
