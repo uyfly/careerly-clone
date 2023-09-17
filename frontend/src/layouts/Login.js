@@ -6,13 +6,12 @@ import { ReactComponent as Arrow } from "../assets/images/ico/ico_arrow.svg";
 import { ReactComponent as Logo } from "../assets/images/logos/logo.svg";
 
 const Login = () => {
-  const REST_API_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_ID}`;
-  const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-  const kakaoLoginHandler = () => {
-    console.log(link);
-    window.location.href = link;
+  const kakaoLoginHandler = async () => {
+    await fetch("http://localhost:8080/kakao/oauth/authorize", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => (document.location.href = data.url));
   };
 
   const emailChangeHandler = () => {};
