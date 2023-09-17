@@ -1,52 +1,53 @@
-import axios from "axios";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const KakaoCallback = () => {
+  const [code, setCode] = useState("");
   const navigate = useNavigate();
-  const code = new URL(document.location.toString()).searchParams.get("code");
-  const grantType = "authorization_code";
-  const clientId = `${process.env.REACT_APP_KAKAO_CLIENT_ID}`;
-  const redirectUri = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
+
+  /**
+   * @description 카카오 로그인
+   */
+  const fetchKakaoLogin = useCallback(
+    async (code) => {
+      try {
+        const params = {
+          code,
+        };
+
+        const response = await (
+          await fetch("http://localhost:8080/kakao/login", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(params),
+          })
+        ).json();
+
+        console.log(response);
+
+        // navigate("/home");
+      } catch (error) {
+        alert("Function fetchLogin error!");
+        console.error(error);
+      }
+    },
+    [navigate]
+  );
 
   useEffect(() => {
-    axios
-      .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=${grantType}&client_id=${clientId}&redirect_uri=${redirectUri}&code=${code}`,
-        {},
-        {
-          headers: {
-            "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-          },
-        }
-      )
-      .then((response) => {
-        console.log("auth token received : " + JSON.stringify(response));
-        const { access_token } = response.data;
+    if (code) {
+      fetchKakaoLogin(code);
+    }
+  }, [code, fetchKakaoLogin]);
 
-        if (access_token) {
-          axios
-            .post(
-              "https://kapi.kakao.com/v2/user/me",
-              {},
-              {
-                headers: {
-                  Authorization: `Bearer ${access_token}`,
-                  "Content-type":
-                    "application/x-www-form-urlencoded;charset=utf-8",
-                },
-              }
-            )
-            .then((response) => {
-              console.log("user data api call : " + JSON.stringify(response));
-            });
-        }
-      });
+  useEffect(() => {
+    const address = new URL(window.location.href);
+    const code = address.searchParams.get("code") || "";
 
-    navigate("/home");
+    setCode(code);
   }, []);
 
-  return <p>KakaoLogin Success</p>;
+  return <div className="App">Loading...</div>;
 };
 
 export default KakaoCallback;
