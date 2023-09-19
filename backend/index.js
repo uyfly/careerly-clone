@@ -98,35 +98,35 @@ app.listen(8080, () => {
 //   response.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 // });
 
-app.get("/kakao/oauth/authorize", (request, response) => {
-  console.log("===== /kakao/oauth/authorize start =====");
+// app.get("/kakao/oauth/authorize", (request, response) => {
+//   console.log("===== /kakao/oauth/authorize start =====");
 
-  const authCode = kakaoUtil.getAuthCode();
+//   const authCode = kakaoUtil.getAuthCode();
 
-  response.status(200).json({ url: authCode });
-  console.log(`authCode : ${authCode}`);
+//   response.status(200).json({ url: authCode });
+//   console.log(`authCode : ${authCode}`);
 
-  console.log("===== /kakao/oauth/authorize end =====");
-});
+//   console.log("===== /kakao/oauth/authorize end =====");
+// });
 
-app.post("/kakao/login", async (request, response, next) => {
-  console.log("===== /login start =====");
+// app.post("/kakao/login", async (request, response, next) => {
+//   console.log("===== /login start =====");
 
-  try {
-    const { code } = request.body;
-    console.log(code);
-    const { access_token } = await kakaoUtil.getToken(code);
-    const userData = await kakaoUtil.getUserData(access_token);
+//   try {
+//     const { code } = request.body;
+//     console.log(code);
+//     const { access_token } = await kakaoUtil.getToken(code);
+//     const userData = await kakaoUtil.getUserData(access_token);
 
-    response.status(200).json(userData);
-  } catch (error) {
-    console.error(error);
+//     response.status(200).json(userData);
+//   } catch (error) {
+//     console.error(error);
 
-    const errorData = {
-      message: "Internal server error.. :(",
-    };
-    response.status(500).json(errorData);
-  }
+//     const errorData = {
+//       message: "Internal server error.. :(",
+//     };
+//     response.status(500).json(errorData);
+//   }
 
   console.log("===== /login end =====");
 });
