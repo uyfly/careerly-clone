@@ -3,14 +3,15 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+import "./App.css";
 import FullLayout from "./layouts/FullLayout";
 import PostCreate from "./views/ui/PostCreate";
 import Home from "./layouts/Home";
 import Login from "./layouts/Login";
-import "./App.css";
-import { Provider } from "react-redux";
-import store from "./store/store";
 import KakaoCallback from "./auth/KakaoCallback";
+import { Provider } from "react-redux";
+import { persistor, store } from "./store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   );
 }
