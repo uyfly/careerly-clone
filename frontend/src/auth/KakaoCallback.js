@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../store/userSlice";
+import { useDispatch } from "react-redux";
 
 const KakaoCallback = () => {
   const [code, setCode] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   /**
@@ -23,9 +26,11 @@ const KakaoCallback = () => {
           })
         ).json();
 
-        console.log(response);
+        const userData = response;
 
-        // navigate("/home");
+        dispatch(login(userData));
+
+        navigate("/home");
       } catch (error) {
         alert("Function fetchLogin error!");
         console.error(error);
