@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   { path: "/posts/create", element: <PostCreate /> },
   { path: "/login", element: <Login /> },
-  { path: "/auth/kakao", element: <KakaoCallback /> },
+  { path: "/auth/kakao/callback", element: <KakaoCallback /> },
 ]);
 
 function App() {
