@@ -1,65 +1,26 @@
 const express = require("express");
 const session = require("express-session");
-const passport = require("passport");
-const KakaoStrategy = require("passport-kakao").Strategy;
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-// const path = require("path");
+const path = require("path");
 
 const app = express();
 
-// Express 미들웨어 설정
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "secret_key", // 변경 필요
     resave: false,
     saveUninitialized: true,
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
-// 카카오 로그인 설정
-passport.use(
-  new KakaoStrategy(
-    {
-      clientID: process.env.REACT_APP_KAKAO_CLIENT_ID,
-      callbackURL: process.env.REACT_APP_KAKAO_REDIRECT_URI,
+    cookie: {
+      secure: false, // HTTPS를 사용하는 경우 true로 설정
+      maxAge: 3600000, // 세션 만료 시간 (1시간)
     },
-    (accessToken, refreshToken, profile, done) => {
-      // 카카오 로그인 성공 시 사용자 정보를 세션에 저장
-      req.session.user = profile;
-      return done(null, profile);
-    }
-  )
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((obj, done) => {
-  done(null, user);
-});
-
-// 카카오 로그인 라우트
-app.get("/auth/kakao", passport.authenticate("kakao"));
-
-app.get(
-  "/auth/kakao/callback",
-  passport.authenticate("kakao", {
-    successRedirect: "/home",
-    failureRedirect: "/login",
   })
 );
 
 // 메인 페이지 라우트
 app.get("/home", (request, response) => {
-  if (request.isAuthenticated()) {
+  if (!request.session) {
     // 인증된 사용자라면 메인 페이지 렌더링
-    response.send("메인 페이지, 사용자 : " + request.user.username);
+    response.send("메인 페이지, 사용자 : " + JSON.stringify(request.session));
   } else {
     // 인증되지 않은 사용자는 로그인 페이지로 리디렉션
     response.redirect("/login");
@@ -98,6 +59,8 @@ app.listen(8080, () => {
 //   response.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 // });
 
+app.use(express.static("public"));
+
 app.get("/kakao/oauth/authorize", (request, response) => {
   console.log("===== /kakao/oauth/authorize start =====");
 
@@ -118,6 +81,7 @@ app.post("/kakao/login", async (request, response, next) => {
     const { access_token } = await kakaoUtil.getToken(code);
     const userData = await kakaoUtil.getUserData(access_token);
 
+    request.session.user = userData;
     response.status(200).json(userData);
   } catch (error) {
     console.error(error);
