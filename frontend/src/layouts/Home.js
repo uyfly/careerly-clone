@@ -10,10 +10,15 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const [isOmitted, setIsOmitted] = useState(true);
   const postList = useSelector((state) => state.post.postList);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const user = useSelector((state) => state.user.user);
 
   const omitHandler = () => {
     setIsOmitted(false);
   };
+
+  console.log(`isAuthenticated? ${isAuthenticated}`);
+  console.log(`Who am I? ${JSON.stringify(user)}`);
 
   return (
     <div className="bg-slate-50">
