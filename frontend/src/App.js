@@ -12,6 +12,17 @@ import KakaoCallback from "./auth/KakaoCallback";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { useSelector } from "react-redux";
+
+const PrivateRoute = ({ element }) => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+  if (isAuthenticated) {
+    return element;
+  } else {
+    return <Navigate to="/login" />;
+  }
+};
 
 const router = createBrowserRouter([
   {
@@ -19,10 +30,10 @@ const router = createBrowserRouter([
     element: <FullLayout />,
     children: [
       { path: "/", element: <Navigate to="/home" /> },
-      { path: "/home", element: <Home /> },
+      { path: "/home", element: <PrivateRoute element={<Home />} /> },
     ],
   },
-  { path: "/posts/create", element: <PostCreate /> },
+  { path: "/posts/create", element: <PrivateRoute element={<PostCreate />} /> },
   { path: "/login", element: <Login /> },
   { path: "/auth/kakao/callback", element: <KakaoCallback /> },
 ]);
