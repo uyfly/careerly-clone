@@ -4,7 +4,7 @@ import userReducer from "./userSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
-import sessionStorage from "redux-persist/es/storage/session";
+// import storageSession from "redux-persist/lib/storage/storageSession";
 
 const rootPersistConfig = {
   key: "root",
@@ -13,7 +13,7 @@ const rootPersistConfig = {
 
 const userPersistConfig = {
   key: "user",
-  storage: sessionStorage,
+  storage,
 };
 
 const rootReducer = combineReducers({
