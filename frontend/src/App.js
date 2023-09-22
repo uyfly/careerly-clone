@@ -17,7 +17,11 @@ import { useSelector } from "react-redux";
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  if (element.type.name === "Login") {
+    return isAuthenticated ? <Navigate to="/home" /> : <Login />;
+  } else {
+    return isAuthenticated ? element : <Navigate to="/login" />;
+  }
 };
 
 function App() {
@@ -34,7 +38,7 @@ function App() {
       path: "/posts/create",
       element: <PrivateRoute element={<PostCreate />} />,
     },
-    { path: "/login", element: <Login /> },
+    { path: "/login", element: <PrivateRoute element={<Login />} /> },
     { path: "/auth/kakao/callback", element: <KakaoCallback /> },
   ]);
 
