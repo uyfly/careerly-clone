@@ -17,28 +17,27 @@ import { useSelector } from "react-redux";
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
-  if (isAuthenticated) {
-    return element;
-  } else {
-    return <Navigate to="/login" />;
-  }
+  return isAuthenticated ? element : <Navigate to="/login" />;
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <FullLayout />,
-    children: [
-      { path: "/", element: <Navigate to="/home" /> },
-      { path: "/home", element: <PrivateRoute element={<Home />} /> },
-    ],
-  },
-  { path: "/posts/create", element: <PrivateRoute element={<PostCreate />} /> },
-  { path: "/login", element: <Login /> },
-  { path: "/auth/kakao/callback", element: <KakaoCallback /> },
-]);
-
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <FullLayout />,
+      children: [
+        { path: "/", element: <Navigate to="/home" /> },
+        { path: "/home", element: <PrivateRoute element={<Home />} /> },
+      ],
+    },
+    {
+      path: "/posts/create",
+      element: <PrivateRoute element={<PostCreate />} />,
+    },
+    { path: "/login", element: <Login /> },
+    { path: "/auth/kakao/callback", element: <KakaoCallback /> },
+  ]);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
