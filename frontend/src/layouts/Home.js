@@ -29,7 +29,7 @@ const Home = () => {
               <a aria-label="내 프로필" href="/profiles/535435">
                 <img
                   className="aspect-square object-cover rounded-full w-10 h-10 profile-image"
-                  src="https://publy-cdn.s3.ap-northeast-2.amazonaws.com/user-uploaded/538043/2023.08/2699a3c1239422383b69c0d3b8d7a696c62fa108a34b7935234ec904a8a35eca.png"
+                  src={user.thumbnail}
                   alt="profile picture"
                   title="profile picture"
                 />
@@ -49,7 +49,7 @@ const Home = () => {
           </div>
           {postList.map((data, index) => {
             return (
-              <div className="infinite-scroll-component__outerdiv">
+              <div className="infinite-scroll-component__outerdiv" key={index}>
                 <div className="infinite-scroll-component flex flex-col gap-5">
                   <div>
                     <div className="bg-white border border-solid border-slate-300">
