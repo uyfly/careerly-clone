@@ -1,8 +1,24 @@
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const { User } = require("./models/User");
 
 const app = express();
+
+mongoose
+  .connect(
+    "mongodb+srv://kwy120:fbw8yip237!@cluster0.8euidl6.mongodb.net/?retryWrites=true&w=majority"
+  )
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((error) => console.log(error));
+
+// application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// application/json
+app.use(bodyParser.json());
 
 app.use(
   session({
@@ -93,4 +109,21 @@ app.post("/kakao/login", async (request, response, next) => {
   }
 
   console.log("===== /login end =====");
+});
+
+app.post("/register", async (request, response) => {
+  // body parser를 통해 body에 담긴 정보를 가져온다
+  const user = new User(request.body);
+
+  // mongoDB 메서드, user 모델에 저장
+  const result = await user
+    .save()
+    .then(() => {
+      response.status(200).json({
+        success: true,
+      });
+    })
+    .catch((error) => {
+      response.json({ success: false, error });
+    });
 });
