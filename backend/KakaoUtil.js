@@ -87,6 +87,7 @@ class KakaoUtil {
       nickname: data.kakao_account.profile.nickname,
       thumbnail: data.kakao_account.profile.thumbnail_image_url,
       profile: data.kakao_account.profile.profile_image_url,
+      email: data.kakao_account.email,
     };
 
     return userData;
