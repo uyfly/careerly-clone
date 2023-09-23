@@ -5,8 +5,11 @@ import { ReactComponent as Logo } from "../assets/images/logos/logo.svg";
 import { ReactComponent as Search } from "../assets/images/ico/ico_search.svg";
 import { ReactComponent as Chatting } from "../assets/images/ico/ico_chatting.svg";
 import { ReactComponent as Notification } from "../assets/images/ico/ico_notification.svg";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const user = useSelector((state) => state.user.user);
+
   return (
     <nav className="flex flex-wrap h-14 border-0 border-b border-solid border-color-slate-300 bg-color-white fixed w-full z-[5] top-0">
       <div className="bg-white flex justify-between w-full h-full max-w-screen-xl mx-auto px-2 md:px-4">
@@ -66,6 +69,69 @@ const Header = () => {
           <a className="p-2 relative" aria-label="알림" href="">
             <Notification />
           </a>
+          <div className="relative hidden md:inline">
+            <button
+              className="p-0 m-2 flex rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-slate-500 focus-visible:ring-offset-2"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+            >
+              <img
+                className="w-9 h-9 profile-image"
+                src={user.thumbnail}
+                alt={`${user.nickname}님의 프로필사진`}
+              />
+            </button>
+            <div
+              className="z-[6] top-[3.25rem] hidden absolute w-[12.5rem] py-2 bg-color-white rounded right-0 left-auto border border-solid border-color-slate-300 shadow-lg text-sm text-slate-600 hover:text-slate-900 !block"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <button
+                className="w-full block text-left text-sm text-color-slate-900 hover:bg-color-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"
+                type="button"
+                aria-hidden="true"
+              >
+                <span>내 프로필</span>
+              </button>
+              <button
+                className="w-full block text-left text-sm text-color-slate-900 hover:bg-color-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"
+                type="button"
+                aria-hidden="true"
+              >
+                <span>저장한 게시물</span>
+              </button>
+              <button
+                className="dropdown-item focus:outline-none py-2 px-4"
+                type="button"
+                aria-hidden="true"
+              >
+                <span>관심분야 설정</span>
+              </button>
+              <button
+                className="dropdown-item focus:outline-none py-2 px-4"
+                type="button"
+                aria-hidden="true"
+              >
+                <span>설정</span>
+              </button>
+              <div className="h-px w-[168px] bg-color-slate-200 my-1 mx-4"></div>
+              <button
+                className="w-full block text-left text-sm text-color-slate-900 hover:bg-color-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"
+                type="button"
+                aria-hidden="true"
+              >
+                <span>고객센터</span>
+              </button>
+              <a
+                className="w-full block text-left text-sm text-color-slate-900 hover:bg-color-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"
+                href="/"
+              >
+                <span className="text-color-slate-900">로그아웃</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
