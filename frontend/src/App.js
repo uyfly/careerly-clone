@@ -7,6 +7,7 @@ import "./App.css";
 import FullLayout from "./layouts/FullLayout";
 import PostCreate from "./views/ui/PostCreate";
 import Home from "./layouts/Home";
+import Main from "./layouts/Main";
 import Login from "./layouts/Login";
 import KakaoCallback from "./auth/KakaoCallback";
 import { Provider } from "react-redux";
@@ -20,7 +21,7 @@ const PrivateRoute = ({ element }) => {
   if (element.type.name === "Login") {
     return isAuthenticated ? <Navigate to="/home" /> : <Login />;
   } else {
-    return isAuthenticated ? element : <Navigate to="/login" />;
+    return isAuthenticated ? element : <Navigate to="/" />;
   }
 };
 
@@ -30,7 +31,7 @@ function App() {
       path: "/",
       element: <FullLayout />,
       children: [
-        { path: "/", element: <Navigate to="/home" /> },
+        { path: "/", element: <Main /> },
         { path: "/home", element: <PrivateRoute element={<Home />} /> },
       ],
     },
