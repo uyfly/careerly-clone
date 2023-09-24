@@ -18,6 +18,14 @@ const Header = () => {
     setIsDropdownMenuOpen((prev) => !prev);
   };
 
+  const kakaoLogoutHandler = async () => {
+    await fetch("http://localhost:8080/kakao/logout", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => (document.location.href = data.url));
+  };
+
   return (
     <nav className="flex flex-wrap h-14 border-0 border-b border-solid border-color-slate-300 bg-color-white fixed w-full z-[5] top-0">
       <div className="bg-white flex justify-between w-full h-full max-w-screen-xl mx-auto px-2 md:px-4">
@@ -144,7 +152,8 @@ const Header = () => {
                 </button>
                 <a
                   className="w-full block text-left text-sm text-color-slate-900 hover:bg-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"
-                  href="/"
+                  // href="/"
+                  onClick={kakaoLogoutHandler}
                 >
                   <span className="text-color-slate-900">로그아웃</span>
                 </a>
@@ -160,6 +169,7 @@ const Header = () => {
                   className="w-full block text-left text-sm text-color-slate-900 hover:bg-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"
                   type="button"
                   aria-hidden="true"
+                  onClick={() => (window.location.href = "/login")}
                 >
                   <p>로그인</p>
                 </button>
