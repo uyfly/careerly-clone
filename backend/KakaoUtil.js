@@ -4,6 +4,7 @@ class KakaoUtil {
   constructor() {
     this.clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
     this.redirectUri = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+    this.logoutRedirectUri = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECT_URI;
   }
 
   /**
@@ -11,6 +12,13 @@ class KakaoUtil {
    */
   getAuthCode() {
     return `https://kauth.kakao.com/oauth/authorize?client_id=${this.clientId}&redirect_uri=${this.redirectUri}&response_type=code`;
+  }
+
+  /**
+   * @description 카카오계정과 함께 로그아웃
+   */
+  getLogoutRedirectUri() {
+    return `https://kauth.kakao.com/oauth/logout?client_id=${this.clientId}&logout_redirect_uri=${this.logoutRedirectUri}`;
   }
 
   /**
@@ -24,16 +32,6 @@ class KakaoUtil {
       redirect_uri: this.redirectUri,
       code,
     };
-
-    // const { data } = await axios.post(
-    //   "https://kauth.kakao.com/oauth/token",
-    //   params,
-    //   {
-    //     headers: {
-    //       "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-    //     },
-    //   }
-    // );
 
     const data = await (
       await fetch(
@@ -64,13 +62,6 @@ class KakaoUtil {
    * @param 엑세스 토큰
    */
   async getUserData(token) {
-    // const { data } = await axios.get("https://kapi.kakao.com/v2/user/me", {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //     "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-    //   },
-    // });
-
     const data = await (
       await fetch("https://kapi.kakao.com/v2/user/me", {
         method: "GET",

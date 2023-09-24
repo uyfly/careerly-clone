@@ -111,6 +111,17 @@ app.post("/kakao/login", async (request, response, next) => {
   console.log("===== /login end =====");
 });
 
+app.get("/kakao/logout", async (request, response) => {
+  console.log("===== /logout start =====");
+
+  const logoutRedirectUri = kakaoUtil.getLogoutRedirectUri();
+
+  response.status(200).json({ url: logoutRedirectUri });
+  console.log(`logoutRedirectUri : ${logoutRedirectUri}`);
+
+  console.log("===== /logout end =====");
+});
+
 app.post("/register", async (request, response) => {
   // body parser를 통해 body에 담긴 정보를 가져온다
   const user = new User(request.body);
