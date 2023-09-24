@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Footer from "./Footer";
 import { Outlet } from "react-router";
 
 const FullLayout = () => {
@@ -9,6 +10,7 @@ const FullLayout = () => {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 };
