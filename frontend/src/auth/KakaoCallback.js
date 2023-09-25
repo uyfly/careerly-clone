@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/userSlice";
+import { login, logout } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 
 const KakaoCallback = () => {
@@ -14,6 +14,7 @@ const KakaoCallback = () => {
   const fetchKakaoLogin = useCallback(
     async (code) => {
       try {
+        console.log("로그인 되었습니다.");
         const params = {
           code,
         };
@@ -39,17 +40,21 @@ const KakaoCallback = () => {
     [navigate]
   );
 
-  useEffect(() => {
-    if (code) {
-      fetchKakaoLogin(code);
-    }
-  }, [code, fetchKakaoLogin]);
+  /**
+   * @description 카카오 로그아웃
+   */
+  const fetchKakaoLogout = () => {
+    console.log("로그아웃 되었습니다.");
+    dispatch(logout());
+    navigate("/");
+  };
 
   useEffect(() => {
     const address = new URL(window.location.href);
     const code = address.searchParams.get("code") || "";
 
     setCode(code);
+    code ? fetchKakaoLogin(code) : fetchKakaoLogout();
   }, []);
 
   return <div className="App">Loading...</div>;
