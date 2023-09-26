@@ -7,6 +7,7 @@ import { ReactComponent as Search } from "../assets/images/ico/ico_search.svg";
 import { ReactComponent as Chatting } from "../assets/images/ico/ico_chatting.svg";
 import { ReactComponent as Notification } from "../assets/images/ico/ico_notification.svg";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -119,7 +120,9 @@ const Header = () => {
                   type="button"
                   aria-hidden="true"
                 >
-                  <span>내 프로필</span>
+                  <Link to="/profiles">
+                    <span>내 프로필</span>
+                  </Link>
                 </button>
                 <button
                   className="w-full block text-left text-sm text-color-slate-900 hover:bg-slate-50 focus:bg-color-slate-100 focus:outline-none py-2 px-4"

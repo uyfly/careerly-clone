@@ -9,6 +9,7 @@ import PostCreate from "./views/ui/PostCreate";
 import Home from "./layouts/Home";
 import Main from "./layouts/Main";
 import Login from "./layouts/Login";
+import Profiles from "./layouts/Profiles";
 import KakaoCallback from "./auth/KakaoCallback";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
@@ -33,6 +34,7 @@ function App() {
       children: [
         { path: "/", element: <Main /> },
         { path: "/home", element: <PrivateRoute element={<Home />} /> },
+        { path: "/profiles", element: <PrivateRoute element={<Profiles />} /> },
       ],
     },
     {
