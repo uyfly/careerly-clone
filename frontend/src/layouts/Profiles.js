@@ -63,6 +63,9 @@ const Profiles = () => {
               </button>
             </div>
           </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-row gap-3 bg-white border border-solid border-slate-700 rounded-xl p-4 items-center"></div>
+          </div>
         </div>
       </div>
     </div>
