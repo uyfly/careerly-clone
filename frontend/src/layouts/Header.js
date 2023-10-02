@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   const kakaoLogoutHandler = async () => {
-    await fetch("http://localhost:8080/kakao/logout", {
+    await fetch("/kakao/logout", {
       method: "GET",
     })
       .then((response) => response.json())
