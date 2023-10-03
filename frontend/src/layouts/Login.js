@@ -8,7 +8,7 @@ import Footer from "./Footer";
 
 const Login = () => {
   const kakaoLoginHandler = async () => {
-    await fetch("/kakao/oauth/authorize", {
+    await fetch("/users/kakao/oauth/authorize", {
       method: "GET",
     })
       .then((response) => response.json())

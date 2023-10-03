@@ -20,7 +20,7 @@ const KakaoCallback = () => {
         };
 
         const response = await (
-          await fetch("/kakao/login", {
+          await fetch("/users/kakao/login", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(params),
