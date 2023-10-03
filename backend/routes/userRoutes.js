@@ -22,6 +22,6 @@ router.post("/kakao/login", userController.getKakaoLogin);
 // 카카오 로그아웃
 router.get("/kakao/logout", userController.getKakaoLogout);
 // 사용자 등록
-router.post("/register");
+router.post("/register", userController.registerUser);
 
 module.exports = router;
