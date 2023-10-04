@@ -1,9 +1,7 @@
 const express = require("express");
-const session = require("express-session");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const { User } = require("./models/User");
 
 const app = express();
 app.use(bodyParser.json());
@@ -26,29 +24,18 @@ app.listen(8080, () => {
   console.log("서버가 http://localhost:8080 에서 실행 중입니다.");
 });
 
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-// app.get("/", function (request, response) {
-//   response.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-// });
-
-// app.get("*", function (request, response) {
-//   response.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-// });
-
-// root 페이지 라우트
-app.get("/getSession", (request, response) => {
-  console.log("===== /getSession start =====");
-
-  console.log("$$$$$$$$$$$$$$$$$$$$" + request.session.user);
-  if (request.session.user) {
-    response.send({ message: `Welcome ${request.session.user.nickname}` });
+// 세션 확인 및 로그인 페이지로 리디렉션하는 미들웨어
+const checkSession = (req, res, next) => {
+  if (req.session && req.session.user) {
+    console.log("세션있음");
   } else {
-    response.send({ message: "No session" });
+    console.log("세션없음");
+    // res.redirect("/login");
   }
+};
 
-  console.log("===== /getSession end =====");
-});
+// 모든 페이지에서 세션 확인 미들웨어 사용
+app.use(checkSession);
 
 // 메인 페이지 라우트
 app.get("/home", (request, response) => {
