@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as Like } from "../assets/images/ico/ico_like.svg";
 import { ReactComponent as Repost } from "../assets/images/ico/ico_repost.svg";
 import { ReactComponent as Reply } from "../assets/images/ico/ico_reply.svg";
@@ -6,6 +6,8 @@ import { ReactComponent as Bookmark } from "../assets/images/ico/ico_bookmark.sv
 import { ReactComponent as Sharing } from "../assets/images/ico/ico_sharing.svg";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import profileDummy from "../assets/images/img/img_profile_dummy.png";
 
 const Home = () => {
   const [isOmitted, setIsOmitted] = useState(true);
@@ -17,9 +19,6 @@ const Home = () => {
     setIsOmitted(false);
   };
 
-  console.log(`isAuthenticated? ${isAuthenticated}`);
-  console.log(`Who am I? ${JSON.stringify(user)}`);
-
   return (
     <div className="bg-slate-50">
       <div className="w-[1024px] px-6 grid grid-cols-12 gap-12 bg-slate-50 mx-auto">
@@ -29,7 +28,7 @@ const Home = () => {
               <a aria-label="내 프로필" href="/profiles/535435">
                 <img
                   className="aspect-square object-cover rounded-full w-10 h-10 profile-image"
-                  src={user.thumbnail}
+                  src={user ? user.image : profileDummy}
                   alt="profile picture"
                   title="profile picture"
                 />

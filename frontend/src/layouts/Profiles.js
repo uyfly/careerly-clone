@@ -35,7 +35,7 @@ const Profiles = () => {
             <div className="mt-8">
               <div>
                 <h1 className="inline text-3xl font-semibold text-color-text-bold mb-0">
-                  {user.nickname}
+                  {user.name}
                 </h1>
               </div>
               <p className="text-base text-color-text-subtle">
