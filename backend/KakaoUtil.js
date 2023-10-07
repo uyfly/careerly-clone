@@ -58,6 +58,41 @@ class KakaoUtil {
   }
 
   /**
+   * @description 토큰 갱신하기
+   * @param refresh_token
+   */
+  async updateToken(refresh_token) {
+    const params = {
+      grant_type: "refresh_token",
+      client_id: this.clientId,
+      refresh_token,
+    };
+
+    const data = await (
+      await fetch(
+        `https://kauth.kakao.com/oauth/token?${new URLSearchParams(
+          params
+        ).toString()}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          },
+        }
+      )
+    ).json();
+
+    console.log(`updateToken data : ${JSON.stringify(data)}`);
+
+    const tokenData = {
+      access_token: data.access_token,
+      refresh_token: data.refresh_token,
+    };
+
+    return tokenData;
+  }
+
+  /**
    * @description 사용자 정보 가져오기
    * @param 엑세스 토큰
    */
@@ -75,10 +110,11 @@ class KakaoUtil {
     console.log(`getUserData data : ${JSON.stringify(data)}`);
 
     const userData = {
-      nickname: data.kakao_account.profile.nickname,
-      thumbnail: data.kakao_account.profile.thumbnail_image_url,
-      profile: data.kakao_account.profile.profile_image_url,
+      name: data.kakao_account.profile.nickname,
       email: data.kakao_account.email,
+      image: data.kakao_account.profile.profile_image_url,
+      userId: data.id,
+      accessToken: token,
     };
 
     return userData;
