@@ -102,10 +102,8 @@ const Header = () => {
             >
               <img
                 className="w-9 h-9 profile-image"
-                src={isAuthenticated ? user.thumbnail : profileDummy}
-                alt={`${
-                  isAuthenticated ? user.nickname : "익명"
-                }님의 프로필사진`}
+                src={isAuthenticated ? user.image : profileDummy}
+                alt={`${isAuthenticated ? user.name : "익명"}님의 프로필사진`}
               />
             </button>
             {isAuthenticated ? (
