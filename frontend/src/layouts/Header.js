@@ -27,6 +27,10 @@ const Header = () => {
       .then((data) => (document.location.href = data.url));
   };
 
+  const authHandler = () => {
+    console.log("....");
+  };
+
   return (
     <nav className="flex flex-wrap h-14 border-0 border-b border-solid border-color-slate-300 bg-color-white fixed w-full z-[5] top-0">
       <div className="bg-white flex justify-between w-full h-full max-w-screen-xl mx-auto px-2 md:px-4">
@@ -140,6 +144,7 @@ const Header = () => {
                   className="dropdown-item focus:outline-none !py-2 !px-4"
                   type="button"
                   aria-hidden="true"
+                  onClick={authHandler}
                 >
                   <span>설정</span>
                 </button>
