@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, logout } from "../store/userSlice";
 import { useDispatch } from "react-redux";
@@ -11,34 +11,51 @@ const KakaoCallback = () => {
   /**
    * @description 카카오 로그인
    */
-  const fetchKakaoLogin = useCallback(
-    async (code) => {
-      try {
-        console.log("로그인 되었습니다.");
-        const params = {
-          code,
-        };
+  const fetchKakaoLogin = async (code) => {
+    try {
+      const params = {
+        code,
+      };
 
-        const response = await (
-          await fetch("/users/kakao/login", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(params),
-          })
-        ).json();
+      await fetch("/users/kakao/login", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(params),
+      })
+        .then((res) => res.json())
+        .then((user) => dispatch(login(user)))
+        .then(navigate("/home"));
 
-        const userData = response;
+      // const response = await fetch("/users/kakao/login", {
+      //   method: "POST",
+      //   headers: { "Content-type": "application/json" },
+      //   body: JSON.stringify(params),
+      // });
 
-        dispatch(login(userData));
-
-        navigate("/home");
-      } catch (error) {
-        alert("Function fetchLogin error!");
-        console.error(error);
-      }
-    },
-    [navigate]
-  );
+      // if (response.ok) {
+      //   const user = await response.json();
+      //   await fetch("/users/getCookies", {
+      //     method: "GET",
+      //   })
+      //     .then((res) => res.json())
+      //     .then((data) =>
+      //       dispatch(
+      //         login({
+      //           user,
+      //           access_token: data.access_token,
+      //         })
+      //       )
+      //     )
+      //     .then(navigate("/home"));
+      //   console.log("로그인 되었습니다.");
+      // } else {
+      //   console.log("로그인 실패");
+      // }
+    } catch (error) {
+      alert("Function fetchLogin error!");
+      console.error(error);
+    }
+  };
 
   /**
    * @description 카카오 로그아웃

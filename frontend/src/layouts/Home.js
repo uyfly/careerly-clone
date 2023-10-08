@@ -19,6 +19,22 @@ const Home = () => {
     setIsOmitted(false);
   };
 
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await fetch("/users/getCookies")
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    };
+
+    // const loadData = async () => {
+    //   const result = await fetch("/users/kakao/user/me").then((data) =>
+    //     console.log(data)
+    //   );
+    // };
+
+    loadData();
+  }, []);
+
   return (
     <div className="bg-slate-50">
       <div className="w-[1024px] px-6 grid grid-cols-12 gap-12 bg-slate-50 mx-auto">

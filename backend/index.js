@@ -17,7 +17,7 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.REACT_APP_MONGODB_ID}:${process.env.REACT_APP_MONGODB_PASSWORD}@cluster0.8euidl6.mongodb.net/?retryWrites=true&w=majority`
   )
-  .then(() => console.log("MongoDB Connected..."))
+  .then(() => console.log("MongoDB connected!"))
   .catch((error) => console.log(error));
 
 app.listen(8080, () => {
@@ -25,17 +25,17 @@ app.listen(8080, () => {
 });
 
 // 세션 확인 및 로그인 페이지로 리디렉션하는 미들웨어
-const checkSession = (req, res, next) => {
-  if (req.session && req.session.user) {
-    console.log("세션있음");
-  } else {
-    console.log("세션없음");
-    // res.redirect("/login");
-  }
-};
+// const checkSession = (req, res, next) => {
+//   if (req.session && req.session.user) {
+//     console.log("세션있음");
+//   } else {
+//     console.log("세션없음");
+//     // res.redirect("/login");
+//   }
+// };
 
 // 모든 페이지에서 세션 확인 미들웨어 사용
-app.use(checkSession);
+// app.use(checkSession);
 
 // 메인 페이지 라우트
 app.get("/home", (request, response) => {

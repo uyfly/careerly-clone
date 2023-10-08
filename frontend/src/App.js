@@ -10,11 +10,15 @@ import Home from "./layouts/Home";
 import Main from "./layouts/Main";
 import Login from "./layouts/Login";
 import Profiles from "./layouts/Profiles";
+import Onboarding from "./layouts/Onboarding";
 import KakaoCallback from "./auth/KakaoCallback";
 import { Provider } from "react-redux";
-import { persistor, store } from "./store/store";
-import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./store/store";
 import { useSelector } from "react-redux";
+import Trends from "./layouts/Trends";
+import Qnas from "./layouts/Qnas";
+import Lounge from "./layouts/Lounge";
+import Job from "./layouts/Job";
 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -33,23 +37,26 @@ function App() {
       element: <FullLayout />,
       children: [
         { path: "/", element: <Main /> },
-        { path: "/home", element: <PrivateRoute element={<Home />} /> },
-        { path: "/profiles", element: <PrivateRoute element={<Profiles />} /> },
+        { path: "/home", element: <Home /> },
+        { path: "/trends", element: <Trends /> },
+        { path: "/qnas", element: <Qnas /> },
+        { path: "/job", element: <Job /> },
+        { path: "/lounge", element: <Lounge /> },
+        { path: "/profiles", element: <Profiles /> },
       ],
     },
     {
       path: "/posts/create",
-      element: <PrivateRoute element={<PostCreate />} />,
+      element: <PostCreate />,
     },
-    { path: "/login", element: <PrivateRoute element={<Login />} /> },
+    { path: "/login", element: <Login /> },
     { path: "/auth/kakao/callback", element: <KakaoCallback /> },
+    { path: "/onboarding", element: <Onboarding /> },
   ]);
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
-      </PersistGate>
+      <RouterProvider router={router} />
     </Provider>
   );
 }
