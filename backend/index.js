@@ -24,19 +24,6 @@ app.listen(8080, () => {
   console.log("서버가 http://localhost:8080 에서 실행 중입니다.");
 });
 
-// 세션 확인 및 로그인 페이지로 리디렉션하는 미들웨어
-// const checkSession = (req, res, next) => {
-//   if (req.session && req.session.user) {
-//     console.log("세션있음");
-//   } else {
-//     console.log("세션없음");
-//     // res.redirect("/login");
-//   }
-// };
-
-// 모든 페이지에서 세션 확인 미들웨어 사용
-// app.use(checkSession);
-
 // 메인 페이지 라우트
 app.get("/home", (request, response) => {
   if (!request.session) {
