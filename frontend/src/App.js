@@ -20,6 +20,10 @@ import Lounge from "./layouts/Lounge";
 import Job from "./layouts/Job";
 
 function App() {
+  /**
+   * 새로고침 시 세션 API 호출
+   */
+
   const router = createBrowserRouter([
     {
       path: "/",
