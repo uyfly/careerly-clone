@@ -191,6 +191,60 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            <div className="bg-color-white border border-solid border-color-slate-300">
+              <div>
+                <div className="pt-4 px-4">
+                  <h5 className="mb-0">주간 인기 TOP 10</h5>
+                  <p className="text-sm text-color-slate-700">
+                    지난주 커리어리에서 인기 있던 게시물이에요!
+                  </p>
+                </div>
+                <div className="pb-4">
+                  <div>
+                    <a rel="noreferrer" href="/comments/91555">
+                      <div className="md:hover:bg-color-slate-50 h-20 px-4 flex items-center gap-3">
+                        <div className="flex-none w-[24px] flex justify-center">
+                          <span className="leading-none font-bold text-xl text-color-coral-600">
+                            1
+                          </span>
+                        </div>
+                        <div className="flex-1 pl-1">
+                          <p className="mb-1 text-sm text-color-slate-900 line-clamp-2">
+                            기술, 개발 학습 자료 7가지
+                          </p>
+                          <p className="text-xs text-color-slate-700 line-clamp-1">
+                            <span className="font-bold text-color-slate-900">
+                              킴코더
+                            </span>{" "}
+                            Senior Software Engineer @ AWS
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                    <a rel="noreferrer" href="/comments/91516">
+                      <div className="md:hover:bg-color-slate-50 h-20 px-4 flex items-center gap-3">
+                        <div className="flex-none w-[24px] flex justify-center">
+                          <span className="leading-none font-bold text-xl text-color-coral-600">
+                            2
+                          </span>
+                        </div>
+                        <div className="flex-1 pl-1">
+                          <p className="mb-1 text-sm text-color-slate-900 line-clamp-2">
+                            사이드 프로젝트를 수십억에 매각한 29살 비전공자
+                          </p>
+                          <p className="text-xs text-color-slate-700 line-clamp-1">
+                            <span className="font-bold text-color-slate-900">
+                              김우영
+                            </span>{" "}
+                            개발자
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
