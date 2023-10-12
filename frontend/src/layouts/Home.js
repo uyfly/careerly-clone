@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import profileDummy from "../assets/images/img/img_profile_dummy.png";
+import appDownloadQr from "../assets/images/img/img_app_download_qr.png";
+import logo from "../assets/images/logos/careerlylogo.png";
 
 const Home = () => {
   const [isOmitted, setIsOmitted] = useState(true);
@@ -172,6 +174,24 @@ const Home = () => {
               </div>
             );
           })}
+        </div>
+        <div className="col-span-4 sticky top-14 h-[calc(100vh-56px)] overflow-scroll overscroll-contain hide-scroll-bar">
+          <div className="py-8 flex flex-col gap-5">
+            <div className="flex p-4 bg-white border border-solid border-slate-300">
+              <p className="flex-1 font-bold">
+                앱으로 편리하게
+                <br /> 이용해보세요.
+              </p>
+              <div className="relative">
+                <img src={appDownloadQr} className="w-28 h-28" alt="qrimage" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-white rounded-lg p-1">
+                    <img className="w-6 h-6" src={logo} alt="app logo" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
