@@ -68,12 +68,6 @@ const Header = () => {
           >
             <p>사이드 프로젝트</p>
           </a>
-          <a
-            href=""
-            className="hidden md:flex h-full p-2 items-center gap-1 font-medium text-center text-sm leading-none hover:text-slate-900 text-slate-500"
-          >
-            <p>부트캠프 비교</p>
-          </a>
         </div>
         <div className="flex items-center gap-1">
           <div
