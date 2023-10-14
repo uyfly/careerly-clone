@@ -1,11 +1,24 @@
 const express = require("express");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const MemoryStore = require("memorystore")(session);
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "secret_key", // 변경 필요
+    resave: false,
+    saveUninitialized: true,
+    store: new MemoryStore({ checkPeriod: 60 * 60 * 1000 }),
+  }),
+  cookieParser()
+);
 
 const userRoutes = require("./routes/userRoutes");
 app.use("/users", userRoutes);
@@ -24,13 +37,12 @@ app.listen(8080, () => {
   console.log("서버가 http://localhost:8080 에서 실행 중입니다.");
 });
 
-// 메인 페이지 라우트
-app.get("/home", (request, response) => {
-  if (!request.session) {
-    // 인증된 사용자라면 메인 페이지 렌더링
-    response.send("메인 페이지, 사용자 : " + JSON.stringify(request.session));
-  } else {
-    // 인증되지 않은 사용자는 로그인 페이지로 리디렉션
-    response.redirect("/login");
-  }
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
